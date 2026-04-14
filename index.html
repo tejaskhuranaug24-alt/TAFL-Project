@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFA to DFA Subset Construction</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <h1>NFA → DFA CONVERSION VISUALIZER</h1>
+        <p class="hero-copy">Enter an NFA, then watch the equivalent DFA form state subsets and transitions step by step. Perfect for learning nondeterministic to deterministic automata conversions.</p>
+        <p class="eyebrow">Made by :- TEJAS SINGH KHURANA (2024UCA1832)</p>
+      </div>
+      <div class="hero-actions">
+        <a href="#input" class="button button-primary">Start with NFA Input</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="input" class="panel panel-input">
+        <h2>1. Define the NFA</h2>
+        <div class="form-grid">
+          <label>
+            States
+            <input id="states" placeholder="q0, q1, q2" value="q0, q1, q2" />
+          </label>
+          <label>
+            Alphabet
+            <input id="alphabet" placeholder="0, 1" value="0, 1" />
+          </label>
+          <label>
+            Start state
+            <input id="startState" placeholder="q0" value="q0" />
+          </label>
+          <label>
+            Accept states
+            <input id="acceptStates" placeholder="q2" value="q2" />
+          </label>
+        </div>
+
+        <div class="transitions-panel">
+          <div class="transitions-header">
+            <h3>Transitions</h3>
+            <button id="addTransition" class="button button-secondary">Add transition</button>
+          </div>
+          <div id="transitionRows" class="transition-rows"></div>
+          <p class="hint">Use commas for multiple destination states. Use <strong>ε</strong> or <strong>epsilon</strong> for epsilon transitions.</p>
+        </div>
+
+        <div class="controls">
+          <button id="generateBtn" class="button button-primary">Generate DFA</button>
+          <button id="resetBtn" class="button button-muted">Reset form</button>
+          <div id="message" class="message" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="panel panel-output">
+        <div class="output-header">
+          <div>
+            <h2>2. Construction Overview</h2>
+            <p>Follow the subset construction steps and inspect both automata representations.</p>
+          </div>
+          <div class="step-controls">
+            <button id="prevStep" class="button button-secondary" disabled>Previous</button>
+            <button id="nextStep" class="button button-secondary" disabled>Next</button>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-metadata">
+            <p><strong>Current step:</strong> <span id="currentStep">0</span> / <span id="totalSteps">0</span></p>
+            <p id="stepDescription">Generate the DFA to see construction details.</p>
+          </div>
+          <ol id="stepsList" class="steps-list"></ol>
+        </div>
+
+        <div class="tables-grid">
+          <div class="table-panel">
+            <h3>NFA Transition Table</h3>
+            <div id="nfaTable" class="data-table"></div>
+          </div>
+          <div class="table-panel">
+            <h3>DFA Transition Table</h3>
+            <div id="dfaTable" class="data-table"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-graphs">
+        <div class="output-header">
+          <div>
+            <h2>3. Automation Visualization</h2>
+          </div>
+          <div class="step-controls">
+            <button id="prevStepGraph" class="button button-secondary" disabled>Previous</button>
+            <button id="nextStepGraph" class="button button-secondary" disabled>Next</button>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <span>Nodes = states</span>
+          <span>Arrows = transitions</span>
+          <span>Labels = symbols on edges</span>
+          <span>Double circle = accepting state</span>
+        </div>
+        <div class="graph-grid">
+          <div class="graph-card">
+            <h3>Original NFA</h3>
+            <div id="nfaGraph" class="graph-view"></div>
+          </div>
+          <div class="graph-card">
+            <h3>Generated DFA</h3>
+            <div id="dfaGraph" class="graph-view"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
